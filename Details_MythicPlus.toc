@@ -1,4 +1,4 @@
-## Interface: 110207
+## Interface: 120000
 ## Title: Details!: Mythic Plus Extension
 ## Title-ruRU: Details!: Расширение М+
 ## Notes: Add Mythic Plus stuff on Details!
