@@ -30,7 +30,7 @@ parserFrame:SetScript("OnEvent", function (self, ...) self:OnEvent(...) end)
 parserFrame.isParsing = false
 
 -- Linaori: Keeping this support in case older versions ever need this through "classic" versions
-local supportCombatLog = detailsFramework.IsAddonApocalypseWow()
+local supportCombatLog = not detailsFramework.IsAddonApocalypseWow()
 
 function addon.StartParser()
     if supportCombatLog then
