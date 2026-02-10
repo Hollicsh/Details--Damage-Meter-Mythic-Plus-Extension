@@ -8,6 +8,39 @@ local tocFileName, private = ...
 local addon = private.addon
 
 function addon.InitializeEvents()
+    if not Details then
+        local e = CreateFrame("Frame")
+        e:RegisterEvent("PLAYER_REGEN_ENABLED")
+        e:RegisterEvent("PLAYER_REGEN_DISABLED")
+        e:RegisterEvent("ENCOUNTER_START")
+        e:RegisterEvent("ENCOUNTER_END")
+        e:RegisterEvent("CHALLENGE_MODE_COMPLETED")
+        e:RegisterEvent("CHALLENGE_MODE_START")
+
+        e:SetScript("OnEvent", function(self, event, ...)
+            if (event == "PLAYER_REGEN_ENABLED") then
+                addon.OnPlayerLeaveCombat(...)
+            elseif (event == "PLAYER_REGEN_DISABLED") then
+                addon.OnPlayerEnterCombat(...)
+            elseif (event == "ENCOUNTER_START") then
+                addon.OnEncounterStart(...)
+            elseif (event == "ENCOUNTER_END") then
+                addon.OnEncounterEnd(...)
+            elseif (event == "CHALLENGE_MODE_START") then
+                private.log(event)
+                addon.OnMythicDungeonStart(...)
+            elseif (event == "CHALLENGE_MODE_COMPLETED") then
+                private.log(event)
+                addon.OnMythicDungeonEnd(...)
+            end
+
+            --missing on m+ overall segment is ready
+            --missing on m+ continue (after a reload or leave and enter instance for talent change)
+
+        end)
+        return
+    end
+
     --event listener:
     local detailsEventListener = addon.detailsEventListener
 
