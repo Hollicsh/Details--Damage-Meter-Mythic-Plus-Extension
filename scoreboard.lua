@@ -230,7 +230,7 @@ local SaveLoot = function(itemLink, unitName)
 
     local effectiveILvl, _, baseItemLevel = C_Item.GetDetailedItemLevelInfo(itemLink)
     local averageItemLevel = addon.GetRunAverageItemLevel(lastRun)
-    if (effectiveILvl < averageItemLevel * 0.75 or baseItemLevel < 6) then
+    if (effectiveILvl < averageItemLevel * 0.69 or baseItemLevel < 6) then
         return
     end
 
