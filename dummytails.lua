@@ -402,8 +402,34 @@ private.Details = {
 	--end,
 
     GetInstanceInfo = function(Details, mapID)
-        --to be implemented, require ejid cache
-    end,
+        if (not mapID) then
+            return
+        end
+
+        if (not private.EncounterJournal.CacheCreated) then
+            private.EncounterJournal.CreateEncounterJournalDump()
+        end
+
+        if (mapID == 463) then --fall
+            mapID = 1209
+        end
+
+        ---@type details_instanceinfo
+        local instanceData = private.EncounterJournal.CacheRaidData_ByInstanceId[mapID]
+        if (instanceData) then
+            return instanceData
+        end
+
+        instanceData = private.EncounterJournal.CacheRaidData_ByInstanceName[mapID]
+        if (instanceData) then
+            return instanceData
+        end
+
+        instanceData = private.EncounterJournal.CacheRaidData_ByMapId[mapID]
+        if (instanceData) then
+            return instanceData
+        end
+    end
 
 
 }
